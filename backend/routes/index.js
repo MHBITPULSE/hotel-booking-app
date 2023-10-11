@@ -6,4 +6,8 @@ module.exports = (app) => {
     const roomRouter = require('./room.routes')
 
     app.use('/room', roomRouter)
+
+    const fileRouter = require('./file.routes')
+
+    app.use('/file', fileRouter)
 }

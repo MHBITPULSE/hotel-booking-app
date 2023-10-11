@@ -1,6 +1,10 @@
 const db = require('../models');
 const Room = db.sequelize.models.room
 
+const multer = require('multer')
+const { roomStorage } = require('../middlewares/multer')
+const upload = multer({ storage: roomStorage })
+
 
 module.exports.getRooms = async (req, res) => {
     const rooms = await Room.findAll()
@@ -9,8 +13,19 @@ module.exports.getRooms = async (req, res) => {
 }
 
 module.exports.createRoom = async (req, res) => {
-    const room = await Room.create(req.body)
-    if (room) return res.status(201).send("Room Created")
-    else return res.status(400).send("Room not Created, something wrong")
+
+    upload.single('image')(req, res, async function (err) {
+
+        if (err instanceof multer.MulterError) {
+            return res.status(401).send(err)
+        } else if (err) {
+            return res.status(401).send(err)
+        }
+        const room = await Room.create(req.body)
+        room.image = req.file.filename;
+        await room.save();
+        return res.status(201).send(room)
+    })
 }
+
 
