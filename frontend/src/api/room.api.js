@@ -14,3 +14,7 @@ export const createRoom = async (room) => {
             }
       })
 }
+
+export const getRoom = async () => {
+      return await axios.get(url + 'room',)
+}

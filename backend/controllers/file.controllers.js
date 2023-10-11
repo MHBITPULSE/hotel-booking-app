@@ -19,3 +19,8 @@ module.exports.uploadFile = async (req, res) => {
         return res.status(201).send(req.file.filename)
     })
 }
+
+module.exports.downloadFile = async (req, res) => {
+    const file = `${process.cwd()}/${req.query.path}/${req.query.fileName}`;
+    res.download(file); // Set disposition and send it.
+}
