@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        desc: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         size: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -13,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        booked: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -36,6 +44,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         hasFridge: {
             type: DataTypes.BOOLEAN
+        },
+        image: {
+            type: DataTypes.STRING
         }
     });
     return Room;

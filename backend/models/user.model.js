@@ -1,3 +1,4 @@
+const useBcrypt = require('sequelize-bcrypt');
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('user', {
         name: {
@@ -13,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     });
+
+    useBcrypt(User,
+        {
+            field: 'password', // secret field to hash, default: 'password'
+            rounds: 12, // used to generate bcrypt salt, default: 12
+            compare: 'authenticate', // method used to compare secrets, default: 'authenticate'
+        });
 
     return User;
 };
