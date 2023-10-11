@@ -22,28 +22,36 @@ module.exports = (sequelize, DataTypes) => {
         },
         booked: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 0
         },
         hasAc: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         hasTv: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         hasButhTub: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         hasBalcony: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         hasDressingTable: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         hasLocker: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         hasFridge: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         image: {
             type: DataTypes.STRING

@@ -14,8 +14,9 @@ module.exports.getRooms = async (req, res) => {
 
 module.exports.createRoom = async (req, res) => {
 
-    upload.single('image')(req, res, async function (err) {
 
+    upload.single('image')(req, res, async function (err) {
+        console.log(req)
         if (err instanceof multer.MulterError) {
             return res.status(401).send(err)
         } else if (err) {
