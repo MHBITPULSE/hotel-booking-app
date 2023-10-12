@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getRoom } from '../../api/room.api'
+import RoomCard from './RoomCard'
 
 const Room = () => {
       const [room, setroom] = useState([])
@@ -8,22 +9,14 @@ const Room = () => {
             getRoom()
                   .then(response => {
                         console.log(response)
-                        setroom(response.data[0])
+                        setroom(response.data)
                   })
                   .catch(err => console.log(err))
       }, [])
 
       return (
-            <div>
-                  <span>{room.name}</span>
-                  <hr />
-                  <span>{room.desc}</span>
-                  <hr />
-                  <span>{room.size} sft</span>
-                  <hr />
-                  <span>{room.price}</span>
-                  <hr />
-                  <img src={`http://localhost:3000/file?path=uploads/room&fileName=${room.image}`} alt="" />
+            <div className='container d-flex flex-wrap gap-3 p-4 justify-content-evenly align-items-center'>
+                  {room.map((item, index) => <RoomCard room={item} />)}
             </div>
       )
 }

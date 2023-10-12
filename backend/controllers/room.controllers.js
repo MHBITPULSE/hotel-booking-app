@@ -5,6 +5,8 @@ const multer = require('multer')
 const { roomStorage } = require('../middlewares/multer')
 const upload = multer({ storage: roomStorage })
 
+const { Op } = require("sequelize");
+
 
 module.exports.getRooms = async (req, res) => {
     const rooms = await Room.findAll()
@@ -27,6 +29,42 @@ module.exports.createRoom = async (req, res) => {
         await room.save();
         return res.status(201).send(room)
     })
+}
+
+module.exports.filterRooms = async (req, res) => {
+    let filter = {}
+
+    if (Object.hasOwn(req.body, 'priceGt'))
+        filter.price = {
+            [Op.between]: [req.body.priceGt, req.body.priceLt],
+        }
+    if (Object.hasOwn(req.body, 'sizeGt'))
+        filter.size = {
+            [Op.gte]: req.body.sizeGt
+        }
+    if (Object.hasOwn(req.body, 'hasTv'))
+        filter.hasTv = true
+
+    if (Object.hasOwn(req.body, 'hasButhTub'))
+        filter.hasTv = true
+
+    if (Object.hasOwn(req.body, 'TV'))
+        filter.hasTv = true
+    if (Object.hasOwn(req.body, 'TV'))
+        filter.hasTv = true
+
+    const rooms = await Room.findAll({
+        where: {
+            size: {
+
+            },
+            price: {
+
+            }
+        }
+    })
+    if (rooms) return res.status(200).send(rooms)
+    return res.status(400).send("No room found! Create One")
 }
 
 
