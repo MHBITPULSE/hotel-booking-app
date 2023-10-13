@@ -9,7 +9,14 @@ const { Op } = require("sequelize");
 
 
 module.exports.getRooms = async (req, res) => {
-    const rooms = await Room.findAll()
+    const rooms = await Room.findAll({ order: [['price', 'DESC']] })
+    if (rooms) return res.status(200).send(rooms)
+    return res.status(400).send("No room found! Create One")
+}
+
+module.exports.getRoomById = async (req, res) => {
+    console.log(req.params)
+    const rooms = await Room.findByPk(req.params.id)
     if (rooms) return res.status(200).send(rooms)
     return res.status(400).send("No room found! Create One")
 }
@@ -43,28 +50,33 @@ module.exports.filterRooms = async (req, res) => {
             [Op.gte]: req.body.sizeGt
         }
     if (Object.hasOwn(req.body, 'hasTv'))
-        filter.hasTv = true
+        req.body.hasTv === true ?
+            filter.hasTv = true : filter.hasTv = false
 
     if (Object.hasOwn(req.body, 'hasButhTub'))
-        filter.hasTv = true
+        req.body.hasButhTub === true ?
+            filter.hasButhTub = true : filter.hasButhTub = false
 
-    if (Object.hasOwn(req.body, 'TV'))
-        filter.hasTv = true
-    if (Object.hasOwn(req.body, 'TV'))
-        filter.hasTv = true
+    if (Object.hasOwn(req.body, 'hasBalcony'))
+        req.body.hasBalcony === true ?
+            filter.hasBalcony = true : filter.hasBalcony = false
 
-    const rooms = await Room.findAll({
-        where: {
-            size: {
+    if (Object.hasOwn(req.body, 'hasDressingTable'))
+        req.body.hasDressingTable === true ?
+            filter.hasDressingTable = true : filter.hasDressingTable = false
 
-            },
-            price: {
+    if (Object.hasOwn(req.body, 'hasLocker'))
+        req.body.hasLocker === true ?
+            filter.hasLocker = true : filter.hasLocker = false
 
-            }
-        }
-    })
+    if (Object.hasOwn(req.body, 'hasFridge'))
+        req.body.hasFridge === true ?
+            filter.hasFridge = true : filter.hasFridge = false
+
+
+    const rooms = await Room.findAll({ where: filter })
     if (rooms) return res.status(200).send(rooms)
-    return res.status(400).send("No room found! Create One")
+    return res.status(400).send("No room found!")
 }
 
 

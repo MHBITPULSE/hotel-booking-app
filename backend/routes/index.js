@@ -7,6 +7,10 @@ module.exports = (app) => {
 
     app.use('/room', roomRouter)
 
+    const bookingRouter = require('./booking.routes')
+
+    app.use('/booking', bookingRouter)
+
     const fileRouter = require('./file.routes')
 
     app.use('/file', fileRouter)

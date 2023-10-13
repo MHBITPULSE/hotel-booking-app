@@ -18,3 +18,15 @@ export const createRoom = async (room) => {
 export const getRoom = async () => {
       return await axios.get(url + 'room',)
 }
+
+export const getRoomById = async (id) => {
+      return await axios.get(url + 'room/' + id)
+}
+
+export const filterRoom = async (filter) => {
+      return await axios.post(url + 'room/filter', filter)
+}
+
+export const createBooking = async (values) => {
+      return await axios.post(url + 'booking', values)
+}

@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "hotel",
+    "username": "toirihoi_mahmud",
+    "password": "Mahmudeee09@ERL2023",
+    "database": "toirihoi_porrikhadei",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
@@ -14,9 +14,9 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "",
-    "database": "hotel",
+    "username": "toirihoi_mahmud",
+    "password": "Mahmudeee09@ERL2023",
+    "database": "toirihoi_porrikhadei",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

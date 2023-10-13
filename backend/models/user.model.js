@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
+    User.associate = (models) => {
+        User.hasMany(models.booking);
+    };
+
     useBcrypt(User,
         {
             field: 'password', // secret field to hash, default: 'password'
